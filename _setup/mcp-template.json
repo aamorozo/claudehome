@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "interior-design": {
+      "command": "node",
+      "args": ["CLAUDE_DIR/mcp-servers/interior-design/index.js"],
+      "env": {
+        "REPLICATE_API_TOKEN": "${REPLICATE_API_TOKEN}"
+      }
+    }
+  }
+}

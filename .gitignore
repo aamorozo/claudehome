@@ -1,0 +1,21 @@
+# Secrets
+.env
+.env.*
+*.env
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Office lock files
+~$*
+.~lock.*
+
+# Node
+node_modules/
+
+# Build artifacts
+.next/
+dist/
+build/
