@@ -1,0 +1,7 @@
+# Copy to .dev.vars for local development (never commit .dev.vars)
+FUB_API_KEY=your_fub_api_key_here
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/T.../B.../...
+
+# Optional — override stage lists (comma-separated, must match FUB stage names exactly)
+# NEW_BUSINESS_STAGES=New,Attempted Contact
+# MONEY_LIST_STAGES=Hot Lead-Responded,Nurture,Follow Up
