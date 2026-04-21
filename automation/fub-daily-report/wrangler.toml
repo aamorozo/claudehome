@@ -1,0 +1,16 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# 8:30am PDT (UTC-7). Change to "30 16 * * 1-5" Nov-Mar (PST = UTC-8).
+[triggers]
+crons = ["30 15 * * 1-5"]
+
+# Secrets — set via: wrangler secret put <NAME>
+# FUB_API_KEY           — Follow Up Boss API key
+# SLACK_WEBHOOK_URL     — Incoming webhook for #fub-dashboard
+
+# Optional env vars for stage overrides (comma-separated)
+[vars]
+NEW_BUSINESS_STAGES = "New,Attempted Contact"
+MONEY_LIST_STAGES   = "Hot Lead-Responded,Nurture,Follow Up"
