@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: #FFF4E2;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent mobile browsers from intercepting touch gestures we handle manually */
+  touch-action: manipulation;
+  overscroll-behavior: none;
+}
+
+* { box-sizing: border-box; }
