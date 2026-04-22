@@ -1,0 +1,14 @@
+{
+  "name": "fub-daily-report",
+  "version": "1.0.0",
+  "description": "FUB daily hit-list Cloudflare Worker — posts to #fub-dashboard Mon-Fri 8:30am Pacific",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "wrangler dev --test-scheduled"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

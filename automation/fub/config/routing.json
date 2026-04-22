@@ -1,0 +1,38 @@
+{
+  "agents": {
+    "arran": {
+      "name": "Arran Amorozo",
+      "assignedUserId": "REPLACE_WITH_ARRAN_USER_ID"
+    },
+    "keri": {
+      "name": "Keri",
+      "assignedUserId": "REPLACE_WITH_KERI_USER_ID"
+    }
+  },
+  "rules": [
+    {
+      "id": "R001",
+      "description": "investorloan.us inbound always routes to Arran",
+      "trigger": "lead_created",
+      "condition": { "source": "investorloan.us" },
+      "action": "assign",
+      "assignTo": "arran"
+    },
+    {
+      "id": "R002",
+      "description": "Unassigned inbound leads round-robin between Arran and Keri",
+      "trigger": "lead_created",
+      "condition": { "assignedUserId": null },
+      "action": "round_robin",
+      "agents": ["arran", "keri"]
+    },
+    {
+      "id": "R003",
+      "description": "Referral leads always route to Arran",
+      "trigger": "lead_created",
+      "condition": { "stage": "Referrals To Convert" },
+      "action": "assign",
+      "assignTo": "arran"
+    }
+  ]
+}
