@@ -1,0 +1,13 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# 8:30am PDT = 15:30 UTC (Mar-Nov).  PST months (Nov-Mar) shift to 16:30 UTC —
+# adjust the cron or add a second trigger if year-round precision matters.
+[triggers]
+crons = ["30 15 * * 1-5"]
+
+# Set these via `wrangler secret put <NAME>` — never commit real values here:
+#   FUB_API_KEY
+#   SLACK_WEBHOOK_URL
+#   ASSIGNED_USER_IDS   (comma-separated FUB user IDs: "12345,67890")
