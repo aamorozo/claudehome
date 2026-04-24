@@ -1,0 +1,22 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Mon-Fri at 8:30am Pacific Standard Time = 16:30 UTC
+# During PDT (Mar-Nov) adjust to 15:30 UTC — or use two crons and guard with date check
+[triggers]
+crons = [
+  "30 16 * * 1-5",
+  "30 15 * * 1-5",
+]
+
+# Secrets — set via: wrangler secret put FUB_API_KEY
+# Do NOT store real values here
+[vars]
+ENVIRONMENT = "production"
+
+# Optional: KV for caching agent names / rate limit state
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = "YOUR_KV_NAMESPACE_ID"
