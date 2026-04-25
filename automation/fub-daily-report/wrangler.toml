@@ -1,0 +1,22 @@
+name = "fub-daily-report"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Cron triggers
+# 16:30 UTC = 8:30am PST | 15:30 UTC = 8:30am PDT
+# Running both covers the DST gap; worker deduplicates via KV if needed
+[triggers]
+crons = ["30 16 * * 1-5", "30 15 * * 1-5"]
+
+# Secrets — set via: wrangler secret put <NAME>
+# FUB_API_KEY        — Follow Up Boss API key (Settings > API)
+# SLACK_WEBHOOK_URL  — Slack incoming webhook for #fub-dashboard
+# FUB_USER_IDS       — Comma-separated assignedUserId values for Arran + Keri
+#
+# Example:
+#   wrangler secret put FUB_API_KEY
+#   wrangler secret put SLACK_WEBHOOK_URL
+#   wrangler secret put FUB_USER_IDS
+
+[env.production]
+name = "fub-daily-report"
