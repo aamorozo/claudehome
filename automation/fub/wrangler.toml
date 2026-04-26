@@ -1,0 +1,15 @@
+name = "fub-daily-report"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[triggers]
+crons = ["30 15 * * 1-5"]   # 8:30am Pacific (UTC-7 PDT / UTC-8 PST — adjust seasonally)
+
+[vars]
+SLACK_CHANNEL = "#fub-dashboard"
+
+# Secrets — set via: wrangler secret put <NAME>
+# FUB_API_KEY       — Follow Up Boss API key (Settings > API)
+# FUB_SYSTEM_KEY    — Optional FUB system key for attribution
+# SLACK_BOT_TOKEN   — Slack Bot OAuth token (xoxb-...)
