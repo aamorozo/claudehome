@@ -1,0 +1,13 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+workers_dev = false
+
+[triggers]
+# 8:30am Pacific = 15:30 UTC, Mon-Fri
+crons = ["30 15 * * 1-5"]
+
+# Secrets — set via `wrangler secret put`:
+#   FUB_API_KEY      — Follow Up Boss API key
+#   SLACK_WEBHOOK_URL — Incoming webhook for #fub-dashboard
+#   RUN_TOKEN        — Token for manual /run trigger (GET /run?token=...)
