@@ -1,0 +1,14 @@
+{
+  "name": "fub-daily-report",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev --test-scheduled",
+    "deploy": "wrangler deploy",
+    "trigger": "wrangler dev --test-scheduled & sleep 3 && curl 'http://localhost:8787/__scheduled?cron=30+15+*+*+1-5'",
+    "trigger:manual": "curl http://localhost:8787/run"
+  },
+  "devDependencies": {
+    "wrangler": "^3.78.0"
+  }
+}
