@@ -1,0 +1,16 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[triggers]
+# 8:30am Pacific = 15:30 UTC (standard time); adjust to 14:30 UTC during PDT
+crons = ["30 15 * * 1-5"]
+
+[vars]
+# Non-secret config — secrets are set via: wrangler secret put FUB_API_KEY
+REPORT_TIMEZONE = "America/Los_Angeles"
+
+# Secrets required (set with `wrangler secret put <name>`):
+#   FUB_API_KEY         — Follow Up Boss API key (Basic auth username)
+#   SLACK_WEBHOOK_URL   — Slack incoming webhook for #fub-dashboard
