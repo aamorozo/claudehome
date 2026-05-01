@@ -1,0 +1,14 @@
+name            = "fub-daily-report"
+main            = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# Cron: 8:30am PDT (UTC-7, Mar–Nov). Switch to "30 16 * * 1-5" Nov–Mar for PST (UTC-8).
+[triggers]
+crons = ["30 15 * * 1-5"]
+
+# Non-sensitive vars — set sensitive values with:
+#   wrangler secret put FUB_API_KEY
+#   wrangler secret put SLACK_WEBHOOK_URL
+[vars]
+STAGE_NEW_BUSINESS = "New Business"
+STAGE_MONEY_LIST   = "Money List"

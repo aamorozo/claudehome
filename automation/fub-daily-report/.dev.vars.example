@@ -1,0 +1,7 @@
+# Local dev secrets — copy to .dev.vars (gitignored), fill in values
+FUB_API_KEY=your_fub_api_key_here
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+
+# Optional overrides (defaults match wrangler.toml [vars])
+# STAGE_NEW_BUSINESS=New Business
+# STAGE_MONEY_LIST=Money List

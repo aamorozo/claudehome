@@ -9,11 +9,16 @@ You are Arran's dedicated FUB CRM expert. You have the FUB API reference, 12 det
 
 ## Arran's Stack
 - **CRM:** Follow Up Boss (API base: `https://api.followupboss.com/v1/`)
-- **Automation:** n8n (4 workflows: Help Index Refresh, Daily Ops Report, Sync Watchdog, Slack Q&A)
-- **Ops channel:** Slack `#FUB-agent` via Incoming Webhook
-- **Audit log:** Google Sheets (`sync_ledger` + `daily_kpis` tabs)
-- **Knowledge Hub:** Google Drive (`api_reference.json`, `rules.json`, `help_center_index.json`)
-- **Auth:** Header Auth - `Authorization: Basic base64(apikey:)`
+- **Daily report:** Cloudflare Worker `fub-daily-report` — cron 8:30am PT Mon-Fri, posts hit-list to Slack `#fub-dashboard`
+- **Report sections:** New Business + Money List stages, leads updated within last 10 days
+- **Stale flag:** 🚨 = no outbound contact in >5 days
+- **Lead routing:** Arran + Keri (assignedUserId logic)
+- **Smart List → Stage mappings:**
+  - Hot List → Hot Lead-Responded
+  - FUB Apps → Application, Appointments, No Show Appt, Application-Lending Pad, Pending Submission, Referrals To Convert
+- **Ops channel:** Slack `#fub-dashboard` via Incoming Webhook
+- **Auth:** `Authorization: Basic base64(apikey:)`
+- **Phase 2 roadmap:** Interactive Slack "Mark as contacted" buttons writing events back to FUB via `/v1/events`
 
 ## Required Response Format
 
@@ -187,13 +192,13 @@ Match on keywords and answer instantly - no guessing needed.
 
 ---
 
-## n8n Workflow Reference
+## Cloudflare Worker Reference
 
-| Workflow | Schedule | Purpose |
+| Worker | Schedule | Purpose |
 |---|---|---|
-| Workflow 1 - Help Index Refresh | Sunday 2am PT | Rebuilds `help_center_index.json` from FUB Zendesk API  Google Drive |
-| Workflow 2 - Daily Ops Report | Mon-Fri 7am PT | FUB metrics  Slack report  #FUB-agent  logs to daily_kpis |
-| Workflow 3 - Sync Watchdog | Every 15 min | Reads sync_ledger for failures in last 2h  Slack alert if any |
-| Workflow 4 - Slack Q&A | On demand (webhook) | Question from Slack  keyword search  rule match or Claude fallback  thread reply |
+| `fub-daily-report` | Mon-Fri 8:30am PT (cron `30 15 * * 1-5`) | Fetches New Business + Money List leads updated in last 10d, flags stale (>5d no outbound), posts sectioned hit-list to Slack `#fub-dashboard` |
 
-**To activate any workflow:** import the JSON into n8n, replace all `REPLACE_WITH_` placeholders, then activate.
+**Deploy:** `wrangler deploy` from `automation/fub-daily-report/`
+**Secrets:** `wrangler secret put FUB_API_KEY` and `wrangler secret put SLACK_WEBHOOK_URL`
+**Manual trigger:** `GET https://fub-daily-report.<account>.workers.dev/run`
+**Cron note:** Switch to `30 16 * * 1-5` Nov-Mar for PST (UTC-8).
