@@ -1,0 +1,15 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+[triggers]
+# 8:30am PDT (UTC-7) = 15:30 UTC | Change to 16:30 UTC (30 16) during PST (Nov-Mar)
+crons = ["30 15 * * 1-5"]
+
+[vars]
+SLACK_CHANNEL = "#fub-dashboard"
+# Arran and Keri's FUB user IDs — set via wrangler secret or dashboard
+# FUB_API_KEY    → wrangler secret put FUB_API_KEY
+# SLACK_BOT_TOKEN → wrangler secret put SLACK_BOT_TOKEN
+# ARRAN_USER_ID  → wrangler secret put ARRAN_USER_ID
+# KERI_USER_ID   → wrangler secret put KERI_USER_ID
