@@ -1,0 +1,26 @@
+{
+  "_comment": "FUB Smart List to Pipeline Stage mappings — source of truth",
+  "daily_report_stages": ["New Business", "Money List"],
+  "smart_list_mappings": {
+    "Hot List": ["Hot Lead-Responded"],
+    "FUB Apps": [
+      "Application",
+      "Appointments",
+      "No Show Appt",
+      "Application-Lending Pad",
+      "Pending Submission"
+    ],
+    "Referrals To Convert": ["Referrals To Convert"]
+  },
+  "lead_routing": {
+    "_comment": "Set ARRAN_USER_ID and KERI_USER_ID as Cloudflare Secrets",
+    "assignedUserId": {
+      "arran": "ARRAN_USER_ID",
+      "keri": "KERI_USER_ID"
+    }
+  },
+  "thresholds": {
+    "active_window_days": 10,
+    "stale_outbound_days": 5
+  }
+}

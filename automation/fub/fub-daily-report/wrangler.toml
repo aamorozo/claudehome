@@ -1,0 +1,18 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# Cron: Mon-Fri 8:30am Pacific Daylight Time = 15:30 UTC
+# Update to "30 16 * * 1-5" Nov-Mar when Pacific is UTC-8 (PST)
+[triggers]
+crons = ["30 15 * * 1-5"]
+
+# Environment variables — sensitive values must be set as Secrets via:
+#   wrangler secret put FUB_API_KEY
+#   wrangler secret put SLACK_WEBHOOK_URL
+#
+# Optional (for future assignedUserId filtering):
+#   wrangler secret put ARRAN_USER_ID
+#   wrangler secret put KERI_USER_ID
+[vars]
+# No plain-text vars needed; all sensitive values are Secrets
