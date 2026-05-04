@@ -1,0 +1,34 @@
+{
+  "_note": "Smart List name → FUB pipeline stage mappings. Source of truth for stage hygiene.",
+  "smartLists": {
+    "Hot List": {
+      "stages": ["Hot Lead-Responded"],
+      "description": "Leads who have responded and are actively engaged — highest priority daily outreach"
+    },
+    "FUB Apps": {
+      "stages": [
+        "Application",
+        "Appointments",
+        "No Show Appt",
+        "Application-Lending Pad",
+        "Pending Submission",
+        "Referrals To Convert"
+      ],
+      "description": "Leads in application or appointment pipeline — Money List for daily report"
+    },
+    "New Business": {
+      "stages": [
+        "New",
+        "Active Prospect",
+        "Attempting to Contact",
+        "Working",
+        "Pre-Qualified"
+      ],
+      "description": "Fresh and in-progress prospecting leads — New Business section of daily report"
+    }
+  },
+  "dailyReportSections": {
+    "New Business": "smartLists.New Business.stages",
+    "Money List": "smartLists.Hot List.stages + smartLists.FUB Apps.stages"
+  }
+}

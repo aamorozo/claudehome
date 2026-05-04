@@ -1,0 +1,19 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# 8:30am PDT (UTC-7) — adjusts to 7:30am during PST (UTC-8), Nov-Mar
+# To hold exactly 8:30am year-round, deploy two cron triggers or use a scheduled
+# cron expression via a timezone-aware proxy.
+[triggers]
+crons = ["30 15 * * 1-5"]
+
+# Non-secret config — set actual IDs here after lookup
+[vars]
+ARRAN_USER_ID = ""
+KERI_USER_ID  = ""
+
+# Secrets — set via CLI, never commit values:
+#   wrangler secret put FUB_API_KEY
+#   wrangler secret put SLACK_WEBHOOK_URL

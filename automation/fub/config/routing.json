@@ -1,0 +1,43 @@
+{
+  "_note": "Lead routing rules. Populate assignedUserId values from: curl -u <KEY>: https://api.followupboss.com/v1/users | jq '.users[] | {id, name}'",
+  "agents": {
+    "arran": {
+      "name": "Arran Amorozo",
+      "fubUserId": "",
+      "role": "Primary — mortgage production, DSCR, investor loans",
+      "slackUserId": ""
+    },
+    "keri": {
+      "name": "Keri",
+      "fubUserId": "",
+      "role": "Support — lead intake, qualification, follow-up",
+      "slackUserId": ""
+    }
+  },
+  "routingRules": [
+    {
+      "description": "Inbound web leads (investorloan.us)",
+      "assignTo": "keri",
+      "trigger": "source = 'Website'",
+      "handoffStage": "Working",
+      "handoffTo": "arran"
+    },
+    {
+      "description": "Investor/DSCR leads",
+      "assignTo": "arran",
+      "trigger": "tag contains 'investor' OR tag contains 'dscr'"
+    },
+    {
+      "description": "Referral leads",
+      "assignTo": "arran",
+      "trigger": "source = 'Referral'",
+      "stage": "Referrals To Convert"
+    },
+    {
+      "description": "No-show appointments",
+      "assignTo": "keri",
+      "trigger": "stage = 'No Show Appt'",
+      "action": "Re-qualification text sequence"
+    }
+  ]
+}
