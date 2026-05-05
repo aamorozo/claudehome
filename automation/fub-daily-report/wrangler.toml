@@ -1,0 +1,16 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# Cron triggers — times are UTC
+# 8:30am PDT (UTC-7, Mar–Nov): 15:30 UTC
+# 8:30am PST (UTC-8, Nov–Mar): 16:30 UTC  ← update this entry in winter
+[triggers]
+crons = ["30 15 * * 1-5"]
+
+# Required secrets — set via: wrangler secret put FUB_API_KEY
+# [vars] is for non-sensitive config only
+[vars]
+# No public vars needed — all sensitive values are secrets
+
+# Local dev: copy .dev.vars.example to .dev.vars and fill in values

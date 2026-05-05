@@ -1,0 +1,15 @@
+{
+  "name": "fub-daily-report",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "secret:fub": "wrangler secret put FUB_API_KEY",
+    "secret:slack": "wrangler secret put SLACK_WEBHOOK_URL"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
