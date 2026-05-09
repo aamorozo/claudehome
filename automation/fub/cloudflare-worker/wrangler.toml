@@ -1,0 +1,19 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[triggers]
+crons = ["30 15 * * 1-5"]
+
+# 15:30 UTC = 8:30am Pacific (UTC-7 PDT) / 7:30am PST (UTC-8)
+# Adjust to "30 16 * * 1-5" during PST (Nov-Mar)
+
+[vars]
+FUB_BASE_URL = "https://api.followupboss.com/v1"
+SLACK_CHANNEL = "#fub-dashboard"
+LOOKBACK_DAYS = "10"
+STALE_THRESHOLD_DAYS = "5"
+
+# Secrets (set via: wrangler secret put SECRET_NAME)
+# FUB_API_KEY       - Follow Up Boss API key
+# SLACK_WEBHOOK_URL - Slack Incoming Webhook URL
