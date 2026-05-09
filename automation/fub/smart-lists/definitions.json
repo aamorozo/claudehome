@@ -1,0 +1,54 @@
+{
+  "_comment": "FUB Smart List definitions. IDs must be pulled from FUB UI URL (?smartListId=XXX) and filled in.",
+  "smartLists": [
+    {
+      "name": "Hot List",
+      "fubSmartListId": "REPLACE_WITH_ID",
+      "filters": {
+        "stage": "Hot Lead-Responded",
+        "assignedTo": "any"
+      },
+      "reportSection": "Money List"
+    },
+    {
+      "name": "FUB Apps",
+      "fubSmartListId": "REPLACE_WITH_ID",
+      "filters": {
+        "stage": [
+          "Application",
+          "Appointments",
+          "No Show Appt",
+          "Application-Lending Pad",
+          "Pending Submission"
+        ]
+      },
+      "reportSection": "Money List"
+    },
+    {
+      "name": "Referrals To Convert",
+      "fubSmartListId": "REPLACE_WITH_ID",
+      "filters": {
+        "stage": "Referrals To Convert"
+      },
+      "reportSection": "Money List"
+    },
+    {
+      "name": "New Today",
+      "fubSmartListId": "REPLACE_WITH_ID",
+      "filters": {
+        "createdToday": true
+      },
+      "reportSection": "New Business"
+    },
+    {
+      "name": "Uncontacted >15min",
+      "fubSmartListId": "REPLACE_WITH_ID",
+      "filters": {
+        "stage": "New",
+        "noActivitySinceMinutes": 15
+      },
+      "reportSection": "New Business",
+      "triggersAlert": true
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "Smart List to FUB stage mappings. Keep in sync with FUB UI.",
+  "smartLists": {
+    "Hot List": {
+      "fubStage": "Hot Lead-Responded",
+      "section": "Money List",
+      "priority": 1
+    },
+    "FUB Apps": {
+      "fubStages": [
+        "Application",
+        "Appointments",
+        "No Show Appt",
+        "Application-Lending Pad",
+        "Pending Submission"
+      ],
+      "section": "Money List",
+      "priority": 2
+    },
+    "Referrals To Convert": {
+      "fubStage": "Referrals To Convert",
+      "section": "Money List",
+      "priority": 3
+    },
+    "New Business": {
+      "fubStages": [
+        "New",
+        "Attempt to Contact",
+        "Active"
+      ],
+      "section": "New Business",
+      "priority": 4
+    }
+  },
+  "dailyReport": {
+    "sections": ["New Business", "Money List"],
+    "lookbackDays": 10,
+    "staleThresholdDays": 5,
+    "schedule": "8:30am Pacific, Mon-Fri",
+    "cronUTC": "30 15 * * 1-5",
+    "slackChannel": "#fub-dashboard"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "_comment": "Lead routing rules between Arran and Keri. assignedUserId values from FUB /users endpoint.",
+  "agents": {
+    "arran": {
+      "name": "Arran Amorozo",
+      "role": "VP / Primary Producer",
+      "fubUserIdPlaceholder": "REPLACE_WITH_ARRAN_FUB_USER_ID"
+    },
+    "keri": {
+      "name": "Keri",
+      "role": "Loan Officer",
+      "fubUserIdPlaceholder": "REPLACE_WITH_KERI_FUB_USER_ID"
+    }
+  },
+  "routingRules": [
+    {
+      "rule": "referral-arran",
+      "description": "All referral leads default to Arran",
+      "source": ["Referral", "Agent Referral", "Past Client"],
+      "assignTo": "arran",
+      "priority": 1
+    },
+    {
+      "rule": "web-leads-round-robin",
+      "description": "Web inbound leads rotate Arran → Keri → Arran",
+      "source": ["Website", "Zillow", "Realtor.com", "Lending Tree", "Web Form"],
+      "assignTo": "round-robin",
+      "rotationOrder": ["arran", "keri"],
+      "priority": 2
+    },
+    {
+      "rule": "keri-primary-apps",
+      "description": "Leads in Application stage route to Keri for processing",
+      "stage": ["Application", "Application-Lending Pad", "Pending Submission"],
+      "assignTo": "keri",
+      "priority": 3
+    },
+    {
+      "rule": "unassigned-fallback",
+      "description": "Any unassigned lead >15 min alerts Arran and auto-assigns",
+      "condition": "unassigned AND createdMoreThan15MinAgo",
+      "assignTo": "arran",
+      "slackAlert": true,
+      "priority": 99
+    }
+  ],
+  "slaAlerts": {
+    "newLeadResponseMinutes": 15,
+    "staleOutboundDays": 5,
+    "slackChannel": "#fub-dashboard"
+  }
+}
