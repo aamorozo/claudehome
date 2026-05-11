@@ -1,0 +1,13 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# 8:30am PDT (UTC-7, DST) = 15:30 UTC
+# In PST (UTC-8, Nov-Mar) this fires at 7:30am — adjust cron seasonally if needed
+[triggers]
+crons = ["30 15 * * 1-5"]
+
+# Secrets — set via CLI before deploying:
+#   wrangler secret put FUB_API_KEY
+#   wrangler secret put SLACK_WEBHOOK_URL
+#   wrangler secret put MANUAL_TRIGGER_SECRET
