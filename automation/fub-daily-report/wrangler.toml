@@ -1,0 +1,13 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[triggers]
+# Mon-Fri 8:30am PT = 16:30 UTC (UTC-8 winter / UTC-7 summer — adjust for DST)
+# Use 16:30 Nov-Mar (UTC-8), 15:30 Mar-Nov (UTC-7)
+# Set to 15:30 UTC for PDT (Mar-Nov), manually update to 16:30 for PST (Nov-Mar)
+crons = ["30 15 * * 1-5"]
+
+[vars]
+# Non-secret vars go here. Secrets set via: wrangler secret put FUB_API_KEY
+# wrangler secret put SLACK_WEBHOOK_URL
