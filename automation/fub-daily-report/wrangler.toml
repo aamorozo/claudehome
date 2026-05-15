@@ -1,0 +1,26 @@
+name = "fub-daily-report"
+main = "src/index.ts"
+compatibility_date = "2024-09-01"
+
+# 15:30 UTC = 8:30am PDT (summer) / 7:30am PST (winter, still pre-9am)
+# Adjust to 16:30 UTC in Nov-Mar if strict 8:30am PST is needed
+[triggers]
+crons = ["30 15 * * 1-5"]
+
+# Secrets — set via: wrangler secret put <NAME>
+# FUB_API_KEY
+# SLACK_WEBHOOK_URL
+# ARRAN_USER_ID
+# KERI_USER_ID
+
+[vars]
+# Non-secret config (override per environment below if needed)
+
+[env.production]
+name = "fub-daily-report"
+
+[env.staging]
+name = "fub-daily-report-staging"
+
+[env.staging.triggers]
+crons = []  # No auto-run in staging; use GET /run instead
