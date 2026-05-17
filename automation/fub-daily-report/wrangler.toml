@@ -1,0 +1,15 @@
+name = "fub-daily-report"
+main = "worker.js"
+compatibility_date = "2024-09-23"
+
+# Two cron entries handle DST:
+#   15:30 UTC = 8:30am PDT (Mar–Nov)
+#   16:30 UTC = 8:30am PST (Nov–Mar)
+# The worker checks Pacific hour and exits if it isn't 8am.
+[triggers]
+crons = ["30 15 * * 1-5", "30 16 * * 1-5"]
+
+# Secrets — set these via: wrangler secret put <NAME>
+# Do NOT hardcode values here.
+#   FUB_API_KEY       — Follow Up Boss API key
+#   SLACK_WEBHOOK_URL — Incoming webhook URL for #fub-dashboard
