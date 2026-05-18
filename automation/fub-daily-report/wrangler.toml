@@ -1,0 +1,12 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# 8:30am PDT (UTC-7) = 15:30 UTC. During PST (Nov-Mar) this fires at 7:30am PT.
+# To shift back to 8:30am PST, temporarily change to "30 16 * * 1-5".
+[triggers]
+crons = ["30 15 * * 1-5"]
+
+# Secrets — set via: wrangler secret put FUB_API_KEY
+# and: wrangler secret put SLACK_WEBHOOK_URL
+# Never commit actual values here.
