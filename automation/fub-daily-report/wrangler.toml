@@ -1,0 +1,21 @@
+name = "fub-daily-report"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+[triggers]
+# 8:30am PDT (UTC-7) Mon-Fri — update to "30 16 * * 1-5" Nov-Mar for PST (UTC-8)
+crons = ["30 15 * * 1-5"]
+
+# ─── Configurable vars ────────────────────────────────────────────────────────
+[vars]
+# Comma-separated FUB stage names to include in the report
+STAGES = "New Business,Money List"
+# Only include leads updated within this many days
+LOOKBACK_DAYS = "10"
+# Flag leads with no activity for more than this many days with 🚨
+STALE_DAYS = "5"
+
+# ─── Secrets (set via: wrangler secret put <NAME>) ───────────────────────────
+# FUB_API_KEY       — Follow Up Boss API key (Admin > API)
+# SLACK_WEBHOOK_URL — Incoming Webhook URL for #fub-dashboard
+# TRIGGER_SECRET    — Optional: shared secret for manual /run endpoint
