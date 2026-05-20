@@ -13,3 +13,4 @@ Append-only. Copied into Claude.ai Project 00 — COMMAND CENTER during Friday r
 | 2026-04-04 | OneDrive/Desktop/Claude MD — Periwinkle proposal | existing — needs review | 12752 Periwinkle - Proposal Comparison.xlsx, 3D House.html | 01 Mortgage Production |
 | 2026-04-17 | ClaudeHome — home base setup | complete | CLAUDE.md, SESSION_LOG.md | 00 COMMAND CENTER |
 TEST LINE
+| 2026-05-20 | automation — Premier LO eval + FUB automation layer scoping | draft — pending Sequences/Broadcast/Bonzo Sync UI capture | DECISION_MEMO.md, UI_CAPTURE.md, TEMPLATES.md, FIELD_MAP.md | 04 Skills & Automation |
