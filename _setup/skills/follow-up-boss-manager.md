@@ -9,11 +9,12 @@ You are Arran's dedicated FUB CRM expert. You have the FUB API reference, 12 det
 
 ## Arran's Stack
 - **CRM:** Follow Up Boss (API base: `https://api.followupboss.com/v1/`)
-- **Automation:** n8n (4 workflows: Help Index Refresh, Daily Ops Report, Sync Watchdog, Slack Q&A)
-- **Ops channel:** Slack `#FUB-agent` via Incoming Webhook
-- **Audit log:** Google Sheets (`sync_ledger` + `daily_kpis` tabs)
-- **Knowledge Hub:** Google Drive (`api_reference.json`, `rules.json`, `help_center_index.json`)
-- **Auth:** Header Auth - `Authorization: Basic base64(apikey:)`
+- **Daily report:** Cloudflare Worker `fub-daily-report` — cron 8:30am PT Mon-Fri → Slack `#fub-dashboard`
+  - Sections: Money List (Hot Lead-Responded, Application, Appointments, No Show Appt, Application-Lending Pad, Pending Submission) + New Business (New, Attempted Contact, Active, Long Term Nurture, Referrals To Convert)
+  - Filtered to assigned leads updated in last 10 days; 🚨 flag = no activity >5 days
+  - Source: `automation/fub-daily-report/` in claudehome repo
+- **Ops channel:** Slack `#fub-dashboard` via Incoming Webhook
+- **Auth:** Header Auth — `Authorization: Basic base64(apikey:)` (colon after key, blank password)
 
 ## Required Response Format
 
@@ -187,13 +188,21 @@ Match on keywords and answer instantly - no guessing needed.
 
 ---
 
-## n8n Workflow Reference
+## Cloudflare Worker Reference
 
-| Workflow | Schedule | Purpose |
-|---|---|---|
-| Workflow 1 - Help Index Refresh | Sunday 2am PT | Rebuilds `help_center_index.json` from FUB Zendesk API  Google Drive |
-| Workflow 2 - Daily Ops Report | Mon-Fri 7am PT | FUB metrics  Slack report  #FUB-agent  logs to daily_kpis |
-| Workflow 3 - Sync Watchdog | Every 15 min | Reads sync_ledger for failures in last 2h  Slack alert if any |
-| Workflow 4 - Slack Q&A | On demand (webhook) | Question from Slack  keyword search  rule match or Claude fallback  thread reply |
+| Worker | Trigger | Purpose | File |
+|---|---|---|---|
+| `fub-daily-report` | Cron 8:30am PT Mon-Fri | Hit-list to #fub-dashboard (Money List + New Business) | `automation/fub-daily-report/` |
 
-**To activate any workflow:** import the JSON into n8n, replace all `REPLACE_WITH_` placeholders, then activate.
+**Deploy:** `cd automation/fub-daily-report && npm install && wrangler secret put FUB_API_KEY && wrangler secret put SLACK_WEBHOOK_URL && npm run deploy`
+**Manual trigger:** `curl -X POST https://<worker-url>/trigger`
+**Tail logs:** `npm run tail`
+
+## Smart List → Stage Mapping
+
+| Smart List | FUB Stages |
+|---|---|
+| Hot List | Hot Lead-Responded |
+| FUB Apps | Application, Appointments, No Show Appt, Application-Lending Pad, Pending Submission |
+| Referrals To Convert | Referrals To Convert |
+| New Business | New, Attempted Contact, Active, Long Term Nurture |

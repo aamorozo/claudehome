@@ -1,0 +1,17 @@
+name            = "fub-daily-report"
+main            = "src/index.js"
+compatibility_date = "2024-09-01"
+
+# Cron is in UTC.
+# 8:30am PDT (Mar–Nov) = 15:30 UTC  →  "30 15 * * 1-5"
+# 8:30am PST (Nov–Mar) = 16:30 UTC  →  "30 16 * * 1-5"
+# Using PDT offset year-round is close enough for a ops report.
+[triggers]
+crons = ["30 15 * * 1-5"]
+
+# Secrets — never commit values. Set via:
+#   wrangler secret put FUB_API_KEY
+#   wrangler secret put SLACK_WEBHOOK_URL
+#
+# To manually trigger for testing:
+#   curl -X POST https://<worker-url>/trigger
